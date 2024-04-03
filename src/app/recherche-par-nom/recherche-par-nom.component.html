@@ -6,18 +6,18 @@
       <button type="submit" (click)="rechercherProds()" class="btn btn-primary mb-2 ml-2">Rechercher</button>
     </div>
   </form> -->
-  <form class="form-inline">
+  <!-- <form class="form-inline">
     <div class="form-group mx-sm-3 mb-2 mt-2 ">
       <label class="mr-2">Nom Produit</label>
       <input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
     </div>
-  </form>
-  <!-- <form class="form-inline">
+  </form> -->
+  <form class="form-inline">
     <div class="form-group mx-sm-3 mb-2 mt-2 ">
       <label class="mr-2">Nom Produit</label>
       <input #nom [(ngModel)]="searchTerm" name="searchTerm" class="form-control">
     </div>
-  </form> -->
+  </form>
   <div class="card shadow mb-4">
     <div class="card-body">
       <table class="table table-striped">
@@ -29,7 +29,7 @@
           <th>Catégorie</th>
         </tr>
         <!-- @for (note of notes; track $index) {} pour v17+ -->
-        <tbody *ngFor="let produit of produits">
+        <tbody *ngFor="let produit of produits | searchFilter: searchTerm">
           <tr>
             <td>{{produit.idProduit}}</td>
             <td>{{produit.nomProduit}}</td>
