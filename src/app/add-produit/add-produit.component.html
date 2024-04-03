@@ -1,0 +1,39 @@
+<div class="container mt-3">
+  <div>
+    <h2>Ajouter un Produit :</h2>
+  </div>
+  <form>
+    <!-- <div hidden class="col-sm-2 col-md-2 col-lg-2 mb-3">
+      <label for="idProduit">ID Produit</label>
+      <input type="text" [(ngModel)]="newProduit.idProduit" name="idProduit" class="form-control" id="idProduit">
+    </div> -->
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label for="nomProduit">Nom Produit</label>
+      <input type="text" [(ngModel)]="newProduit.nomProduit" name="nomProduit" class="form-control" id="nomProduit">
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
+      <label for="prixProduit">Prix Produit</label>
+      <input type="number" [(ngModel)]="newProduit.prixProduit" name="prixProduit" class="form-control" id="prixProduit">
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label for="dateCreation">Date création</label>
+      <input type="date" [(ngModel)]="newProduit.dateCreation" name="dateCreation" class="form-control" id="dateCreation">
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label for="idCat">Categorie</label>
+      <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="newIdCat">
+        <option *ngFor="let cat of categories" [value]="cat.idCat">
+          {{cat.nomCat}}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
+      <button type="submit" (click)="addProduit()" class="btn btn-success">Ajouter</button>
+    </div>
+    <!-- @if (message) {} - v17+ -->
+    <div *ngIf="message" class="alert alert-success alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{message}}
+    </div>
+  </form>
+</div>
