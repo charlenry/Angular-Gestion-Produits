@@ -1,0 +1,21 @@
+<form>
+  <div [hidden]="i_isAnAdding" class="mb-3">
+    <label>ID Catégorie</label>
+    <input type="text" readonly [(ngModel)]="i_categorie.idCat" name="idCategorie" class="form-control w-25">
+  </div>
+  <div class="mb-3">
+    <label>Nom Catégorie</label>
+    <input type="text" [(ngModel)]="i_categorie.nomCat" name="nomCategorie" class="form-control"
+      placeholder="Entrez un nom de catégorie...">
+  </div>
+  <div class="mb-3">
+    <label>Description Catégorie</label>
+    <input type="text" [(ngModel)]="i_categorie.descriptionCat" name="descCategorie" class="form-control"
+      placeholder="Entrez une description de catégorie...">
+  </div>
+  <div>
+    <button type="submit" [disabled]="!i_categorie.nomCat || !i_categorie.descriptionCat" class="btn btn-success"
+      (click)="saveCategorie()">{{i_isAnAdding ? 'Ajouter' : 'Modifier'}}
+    </button>
+  </div>
+</form>

@@ -29,7 +29,13 @@
       </select>
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
-      <button type="submit" (click)="updateProduit()" class="btn btn-success">Modifer</button>
+      <button 
+        type="submit" 
+        (click)="updateProduit()" 
+        class="btn btn-success"
+        [disabled]="!currentProduit.nomProduit || !currentProduit.prixProduit || !currentProduit.dateCreation || !updatedCatId"
+        >Modifer
+      </button>
     </div>
     <!-- @if (message) {} - v17+ -->
     <div *ngIf="message" class="alert alert-success alert-dismissible fade show">

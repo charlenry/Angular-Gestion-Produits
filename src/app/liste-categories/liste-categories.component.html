@@ -1,0 +1,37 @@
+<div class="container mt-3">
+  <div class="col-sm-4 col-md-4 col-lg-4 mb-4 pl-0">
+    <app-update-categorie 
+      [i_categorie]="editedCat"
+      [i_isAnAdding]="isAnAdding"
+      (o_categorieAdded)= "categorieAdded($event)"
+      *ngIf="isManaged"
+      >
+    </app-update-categorie>
+  </div>
+  <div class="card shadow mb-4">
+    <div>
+      <button type="submit" [disabled]="" class="btn btn-danger"
+        (click)="manageCategories()">{{isManaged ? 'Lister Categories' : 'Ajouter/Modifier Catégories'}}
+      </button>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom Catégorie</th>
+            <th>Description Catégorie</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let cat of categories">
+          <tr>
+            <td>{{cat.idCat}}</td>
+            <td>{{cat.nomCat}}</td>
+            <td>{{cat.descriptionCat}}</td>
+            <td><a class="btn btn-success" (click)="editCat(cat)" *ngIf="isManaged">Editer</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

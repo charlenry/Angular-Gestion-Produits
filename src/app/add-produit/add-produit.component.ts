@@ -20,12 +20,14 @@ export class AddProduitComponent implements OnInit {
   ngOnInit(): void {
     this.produitService.listerCategories().subscribe(cats => {
       this.categories = cats._embedded.categories;
-      // console.log(cats);
+      console.log(cats);
     });
   }
 
   addProduit() {
+    //Recherche du nom de la catégorie sélectionnée dans la liste des catégories pour l'associer au nouveau produit
     this.newProduit.categorie = this.categories.find(cat => cat.idCat == this.newIdCat)!;
+    // Ajout du nouveau produit dans la base de données via le service ProduitService
     this.produitService.ajouterProduit(this.newProduit).subscribe((prod) => {
       console.log(prod);
       this.message = 'Produit ' + this.newProduit.nomProduit + ' ajouté avec succès!';

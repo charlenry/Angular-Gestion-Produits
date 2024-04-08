@@ -5,7 +5,7 @@ import { ProduitService } from '../services/produit.service';
 @Component({
   selector: 'app-recherche-par-nom',
   templateUrl: './recherche-par-nom.component.html',
-  styles: ``,
+  styleUrl: './recherche-par-nom.component.css'
 })
 export class RechercheParNomComponent implements OnInit {
   // nomProduit: string = "";

@@ -28,7 +28,13 @@
       </select>
     </div>
     <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
-      <button type="submit" (click)="addProduit()" class="btn btn-success">Ajouter</button>
+      <button 
+        type="submit" 
+        (click)="addProduit()" 
+        class="btn btn-success"
+        [disabled]="!newProduit.nomProduit || !newProduit.prixProduit || !newProduit.dateCreation || !newIdCat"
+        >Ajouter
+      </button>
     </div>
     <!-- @if (message) {} - v17+ -->
     <div *ngIf="message" class="alert alert-success alert-dismissible fade show">

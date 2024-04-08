@@ -59,4 +59,12 @@ export class ProduitService {
     const url = `${apiURL}/prodsByName/${nom}`;
     return this.http.get<Produit[]>(url);
   }
+
+  ajouterCategorie(cat: Categorie): Observable<Categorie> {
+    // Cette méthode est la même pour ajouter ou modifier une catégorie
+    // Voir produitServiceImpl.java dans la partie Spring Boot
+    return this.http.post<Categorie>(apiURLCat, cat, httpOptions);
+  }
+
+
 }
