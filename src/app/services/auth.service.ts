@@ -19,7 +19,7 @@ export class AuthService {
 
   SignIn(user: User): boolean {
     let isValidUser: boolean = false;
-    
+
     this.users.forEach((curUser) => {
       if (
         user.username === curUser.username &&
@@ -41,6 +41,20 @@ export class AuthService {
     if (!this.roles) return false;
     // return true if the index of 'ADMIN' is greater than -1
     return this.roles.indexOf('ADMIN') > -1;
+  }
+
+  setLoggedUserFromLocalStorage(login: string) {
+    this.loggedUser = login;
+    this.isloggedIn = true;
+    this.getUserRoles(login);
+  }
+  
+  getUserRoles(username: string) {
+    this.users.forEach((curUser) => {
+      if (curUser.username == username) {
+        this.roles = curUser.roles;
+      }
+    });
   }
 
   logout() {
