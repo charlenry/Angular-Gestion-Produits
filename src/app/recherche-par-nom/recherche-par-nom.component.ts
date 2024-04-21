@@ -25,7 +25,7 @@ export class RechercheParNomComponent implements OnInit {
 
   /* rechercherProds() {
     if (this.nomProduit !== "") {
-      this.produitService.rechercherParNom(this.nomProduit).subscribe((prods) => {
+      this.produitService.rechercherProduitsParNom(this.nomProduit).subscribe((prods) => {
         this.produits = prods;
         console.log(prods);
       });
@@ -37,4 +37,6 @@ export class RechercheParNomComponent implements OnInit {
     prod.nomProduit.toLowerCase().includes(filterText.toLowerCase())
     );
   } */
+
+  // Finalement, nous utilisons la méthode filter() dans le pipe searchFilter pour filtrer les produits en fonction du terme de recherche.
 }

@@ -36,9 +36,9 @@
           Connexion
         </a>
         <div class="dropdown-menu">
-          <a *ngIf="!authService.isloggedIn" class="dropdown-item" href="/login">login</a>
-          <a *ngIf="authService.isloggedIn" class="dropdown-item" href="#">Profile</a>
-          <a *ngIf="authService.isloggedIn" class="dropdown-item" (click)="onLogout()">logout</a>
+          <a *ngIf="!this.authService.isloggedIn" class="dropdown-item" href="/login">login</a>
+          <a *ngIf="this.authService.isloggedIn" class="dropdown-item" href="#">Profile</a>
+          <a *ngIf="this.authService.isloggedIn" class="dropdown-item" (click)="onLogout()">logout</a>
         </div>
       </li>
     </ul>

@@ -3,13 +3,13 @@ import { Produit } from '../model/produit.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Categorie } from '../model/categorie.model';
-import { apiURL, apiURLCat } from '../config';
+import { apiURLProd, apiURLCat } from '../config';
 import { CategorieWrapper } from '../model/categorieWrapped.model';
+import { AuthService } from './auth.service';
 
-
-const httpOptions = {
+/* const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
+}; */
 
 @Injectable({
   providedIn: 'root',
@@ -17,54 +17,118 @@ const httpOptions = {
 export class ProduitService {
   produits!: Produit[]; //un tableau de produits
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  listerProduits(): Observable<Produit[]> {
-    return this.http.get<Produit[]>(apiURL);
-  }
-
-  ajouterProduit(prod: Produit): Observable<Produit> {
-    return this.http.post<Produit>(apiURL, prod, httpOptions);
-  }
-
-  supprimerProduit(id: number) {
-    const url = `${apiURL}/${id}`;
-    return this.http.delete(url, httpOptions);
-  }
-
-  consulterProduit(id: number): Observable<Produit> {
-    const url = `${apiURL}/${id}`;
-    return this.http.get<Produit>(url);
-  }
-
-  modifierProduit(prod: Produit): Observable<Produit> {
-    return this.http.put<Produit>(apiURL, prod, httpOptions);
-  }
-
-  /* listerCategories(): Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(apiURL + '/cat');
+  /* listerProduits(): Observable<Produit[]> {
+    return this.http.get<Produit[]>(apiURLProd + '/all');
   } */
 
-  listerCategories(): Observable<CategorieWrapper> {
-    return this.http.get<CategorieWrapper>(apiURLCat);
+  listerProduits(): Observable<Produit[]> {
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    return this.http.get<Produit[]>(apiURLProd + '/all', {
+      headers: httpHeaders,
+    });
+  }
+
+  /* ajouterProduit(prod: Produit): Observable<Produit> {
+    return this.http.post<Produit>(apiURLProd + '/addProd', prod, httpOptions);
+  } */
+
+  ajouterProduit(prod: Produit): Observable<Produit> {
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    return this.http.post<Produit>(apiURLProd + '/addProd', prod, {
+      headers: httpHeaders,
+    });
+  }
+
+  /* supprimerProduit(id: number) {
+    const url = `${apiURLProd}/delProdById/${id}`;
+    return this.http.delete(url, httpOptions);
+  } */
+
+  supprimerProduit(id: number) {
+    const url = `${apiURLProd}/delProdById/${id}`;
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    return this.http.delete(url, { headers: httpHeaders });
+  }
+
+  /* consulterProduit(id: number): Observable<Produit> {
+    const url = `${apiURLProd}/getProdById/${id}`;
+    return this.http.get<Produit>(url);
+  } */
+
+  consulterProduit(id: number): Observable<Produit> {
+    const url = `${apiURLProd}/getProdById/${id}`;
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    return this.http.get<Produit>(url, { headers: httpHeaders });
+  }
+
+  /* modifierProduit(prod: Produit): Observable<Produit> {
+    return this.http.put<Produit>(apiURLProd + '/updateProd', prod, httpOptions);
+  } */
+
+  modifierProduit(prod: Produit): Observable<Produit> {
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    return this.http.put<Produit>(apiURLProd + '/updateProd', prod, {
+      headers: httpHeaders,
+    });
   }
 
   // Retourner la liste des produits d'une catégorie donnée
-  rechercherParCategorie(idCat: number): Observable<Produit[]> {
-    const url = `${apiURL}/prodscat/${idCat}`;
-    return this.http.get<Produit[]>(url);
+  rechercherProduitsParCategorie(idCat: number): Observable<Produit[]> {
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    const url = `${apiURLProd}/prodsByCat/${idCat}`;
+    return this.http.get<Produit[]>(url, {
+      headers: httpHeaders,
+    });
   }
 
-  rechercherParNom(nom: string): Observable<Produit[]> {
-    const url = `${apiURL}/prodsByName/${nom}`;
-    return this.http.get<Produit[]>(url);
+  rechercherProduitsParNom(nom: string): Observable<Produit[]> {
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    const url = `${apiURLProd}/prodsByName/${nom}`;
+    return this.http.get<Produit[]>(url, {
+      headers: httpHeaders,
+    });
   }
 
+  /* // Utilise l'API de RestController pour lister les catégories
+  listerCategories(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(apiURLProduits + '/cat');
+  } */
+
+  // Utilise l'API de Spring Data Rest pour lister les catégories
+  listerCategories(): Observable<CategorieWrapper> {
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    return this.http.get<CategorieWrapper>(apiURLCat, {
+      headers: httpHeaders,
+    });
+  }
+
+  // Utilise l'API de Spring Data Rest pour ajouter une catégorie
   ajouterCategorie(cat: Categorie): Observable<Categorie> {
     // Cette méthode est la même pour ajouter ou modifier une catégorie
     // Voir produitServiceImpl.java dans la partie Spring Boot
-    return this.http.post<Categorie>(apiURLCat, cat, httpOptions);
+    let jwt = this.authService.getToken();
+    jwt = 'Bearer ' + jwt;
+    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    return this.http.post<Categorie>(apiURLCat, cat, {
+      headers: httpHeaders,
+    });
   }
-
-
 }

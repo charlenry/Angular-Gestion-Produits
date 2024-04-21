@@ -24,7 +24,7 @@ export class RechercheParCategorieComponent implements OnInit {
 
   onChange() {
     this.produitService
-      .rechercherParCategorie(this.IdCategorie)
+      .rechercherProduitsParCategorie(this.IdCategorie)
       .subscribe((prods) => {
         this.produits = prods;
     });

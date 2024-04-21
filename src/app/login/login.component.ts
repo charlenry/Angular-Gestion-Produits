@@ -15,12 +15,17 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
-
+  
   onLoggedin() {
-    console.log(this.user);
-
-    let isValidUser: boolean = this.authService.SignIn(this.user);
-    if (isValidUser) this.router.navigate(['/']);
-    else this.hasError = true;
+    this.authService.login(this.user).subscribe({
+      next: (data) => {
+        let jwToken = data.headers.get('Authorization')!;
+        this.authService.saveToken(jwToken);
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        this.hasError = true;
+      }
+    });
   }
 }
