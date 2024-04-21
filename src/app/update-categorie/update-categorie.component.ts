@@ -7,6 +7,9 @@ import { Categorie } from '../model/categorie.model';
   styles: ``,
 })
 export class UpdateCategorieComponent implements OnInit {
+
+  message: string = '';
+
   // i_categorie est représenté par l'attribut [i_categorie] dans le template parent (liste-categories.component.html)
   @Input()
   i_categorie!: Categorie;
@@ -26,5 +29,10 @@ export class UpdateCategorieComponent implements OnInit {
   saveCategorie() {
     // Cette méthode est la même pour ajouter ou modifier une catégorie
     this.o_categorieAdded.emit(this.i_categorie);
+    if (this.i_isAnAdding) {
+      this.message = 'Catégorie ' + this.i_categorie.nomCat + ' ajoutée avec succès !';
+    } else {
+      this.message = 'Catégorie ' + this.i_categorie.nomCat + ' modifiée avec succès !';
+    }
   }
 }

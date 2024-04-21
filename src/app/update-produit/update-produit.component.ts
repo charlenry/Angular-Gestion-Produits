@@ -38,7 +38,7 @@ export class UpdateProduitComponent implements OnInit {
     this.currentProduit.categorie = this.categories.find(cat => cat.idCat == this.updatedCatId)!;
     this.produitService.modifierProduit(this.currentProduit).subscribe((prod) => {
       console.log(prod);
-      this.message = "Produit " + this.currentProduit.nomProduit + " modifié avec succès!";
+      this.message = "Produit " + this.currentProduit.nomProduit + " modifié avec succès !";
       setTimeout(() => {  this.router.navigate(['produits']); }, 3000);
     });    
   }

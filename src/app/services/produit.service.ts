@@ -23,10 +23,14 @@ export class ProduitService {
     return this.http.get<Produit[]>(apiURLProd + '/all');
   } */
 
-  listerProduits(): Observable<Produit[]> {
+  creerHeaders(): HttpHeaders {
     let jwt = this.authService.getToken();
     jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    return new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+  }
+
+  listerProduits(): Observable<Produit[]> {
+    let httpHeaders = this.creerHeaders();
     return this.http.get<Produit[]>(apiURLProd + '/all', {
       headers: httpHeaders,
     });
@@ -37,9 +41,7 @@ export class ProduitService {
   } */
 
   ajouterProduit(prod: Produit): Observable<Produit> {
-    let jwt = this.authService.getToken();
-    jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    let httpHeaders = this.creerHeaders();
     return this.http.post<Produit>(apiURLProd + '/addProd', prod, {
       headers: httpHeaders,
     });
@@ -52,9 +54,7 @@ export class ProduitService {
 
   supprimerProduit(id: number) {
     const url = `${apiURLProd}/delProdById/${id}`;
-    let jwt = this.authService.getToken();
-    jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    let httpHeaders = this.creerHeaders();
     return this.http.delete(url, { headers: httpHeaders });
   }
 
@@ -65,9 +65,7 @@ export class ProduitService {
 
   consulterProduit(id: number): Observable<Produit> {
     const url = `${apiURLProd}/getProdById/${id}`;
-    let jwt = this.authService.getToken();
-    jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    let httpHeaders = this.creerHeaders();
     return this.http.get<Produit>(url, { headers: httpHeaders });
   }
 
@@ -76,9 +74,7 @@ export class ProduitService {
   } */
 
   modifierProduit(prod: Produit): Observable<Produit> {
-    let jwt = this.authService.getToken();
-    jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    let httpHeaders = this.creerHeaders();
     return this.http.put<Produit>(apiURLProd + '/updateProd', prod, {
       headers: httpHeaders,
     });
@@ -86,9 +82,7 @@ export class ProduitService {
 
   // Retourner la liste des produits d'une catégorie donnée
   rechercherProduitsParCategorie(idCat: number): Observable<Produit[]> {
-    let jwt = this.authService.getToken();
-    jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    let httpHeaders = this.creerHeaders();
     const url = `${apiURLProd}/prodsByCat/${idCat}`;
     return this.http.get<Produit[]>(url, {
       headers: httpHeaders,
@@ -96,9 +90,7 @@ export class ProduitService {
   }
 
   rechercherProduitsParNom(nom: string): Observable<Produit[]> {
-    let jwt = this.authService.getToken();
-    jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    let httpHeaders = this.creerHeaders();
     const url = `${apiURLProd}/prodsByName/${nom}`;
     return this.http.get<Produit[]>(url, {
       headers: httpHeaders,
@@ -112,9 +104,7 @@ export class ProduitService {
 
   // Utilise l'API de Spring Data Rest pour lister les catégories
   listerCategories(): Observable<CategorieWrapper> {
-    let jwt = this.authService.getToken();
-    jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    let httpHeaders = this.creerHeaders();
     return this.http.get<CategorieWrapper>(apiURLCat, {
       headers: httpHeaders,
     });
@@ -124,9 +114,7 @@ export class ProduitService {
   ajouterCategorie(cat: Categorie): Observable<Categorie> {
     // Cette méthode est la même pour ajouter ou modifier une catégorie
     // Voir produitServiceImpl.java dans la partie Spring Boot
-    let jwt = this.authService.getToken();
-    jwt = 'Bearer ' + jwt;
-    let httpHeaders = new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
+    let httpHeaders = this.creerHeaders();
     return this.http.post<Categorie>(apiURLCat, cat, {
       headers: httpHeaders,
     });

@@ -14,8 +14,12 @@
       placeholder="Entrez une description de catégorie...">
   </div>
   <div>
-    <button type="submit" [disabled]="!i_categorie.nomCat || !i_categorie.descriptionCat" class="btn btn-success"
-      (click)="saveCategorie()">{{i_isAnAdding ? 'Ajouter' : 'Modifier'}}
+    <button type="submit" [disabled]="!i_categorie.nomCat || !i_categorie.descriptionCat" class="btn btn-success" (click)="saveCategorie()">{{i_isAnAdding ? 'Ajouter' : 'Modifier'}}
     </button>
+  </div>
+   <!-- @if (message) {} - v17+ -->
+   <div *ngIf="message" class="alert alert-success alert-dismissible fade show mt-3">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{message}}
   </div>
 </form>

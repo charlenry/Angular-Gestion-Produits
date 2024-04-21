@@ -30,7 +30,7 @@ export class AddProduitComponent implements OnInit {
     // Ajout du nouveau produit dans la base de données via le service ProduitService
     this.produitService.ajouterProduit(this.newProduit).subscribe((prod) => {
       console.log(prod);
-      this.message = 'Produit ' + this.newProduit.nomProduit + ' ajouté avec succès!';
+      this.message = 'Produit ' + this.newProduit.nomProduit + ' ajouté avec succès !';
       this.newProduit = new Produit();
     });  
     
