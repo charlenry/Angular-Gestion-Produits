@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categorie } from '../model/categorie.model';
 import { ProduitService } from '../services/produit.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-liste-categories',
@@ -13,7 +14,7 @@ export class ListeCategoriesComponent implements OnInit {
   isAnAdding: boolean = true;
   isManaged: boolean = false;
 
-  constructor(private produitService: ProduitService) {}
+  constructor(private produitService: ProduitService, public authService: AuthService) {}
 
   ngOnInit(): void {
     this.chargerCategories();
@@ -45,4 +46,14 @@ export class ListeCategoriesComponent implements OnInit {
       this.isAnAdding = true;
     }
   }
+
+  deleteCategorie(id: number) {
+    let isConfirmed = confirm('Etes-vous sûr ?');
+    if (isConfirmed)
+      this.produitService.supprimerCategorieParId(id).subscribe(() => {
+        //console.log('catégorie supprimée');
+        this.chargerCategories();
+      });
+  }
+
 }

@@ -3,7 +3,7 @@ import { Produit } from '../model/produit.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Categorie } from '../model/categorie.model';
-import { apiURLProd, apiURLCat } from '../config';
+import { rcApiURLProd,  rcApiURLCat, drApiURLCat } from '../config';
 import { CategorieWrapper } from '../model/categorieWrapped.model';
 import { AuthService } from './auth.service';
 
@@ -23,17 +23,14 @@ export class ProduitService {
     return this.http.get<Produit[]>(apiURLProd + '/all');
   } */
 
-  creerHeaders(): HttpHeaders {
+ /*  creerHeaders(): HttpHeaders {
     let jwt = this.authService.getToken();
     jwt = 'Bearer ' + jwt;
     return new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
-  }
+  } */
 
   listerProduits(): Observable<Produit[]> {
-    let httpHeaders = this.creerHeaders();
-    return this.http.get<Produit[]>(apiURLProd + '/all', {
-      headers: httpHeaders,
-    });
+    return this.http.get<Produit[]>(rcApiURLProd + '/all');
   }
 
   /* ajouterProduit(prod: Produit): Observable<Produit> {
@@ -41,10 +38,7 @@ export class ProduitService {
   } */
 
   ajouterProduit(prod: Produit): Observable<Produit> {
-    let httpHeaders = this.creerHeaders();
-    return this.http.post<Produit>(apiURLProd + '/addProd', prod, {
-      headers: httpHeaders,
-    });
+    return this.http.post<Produit>(rcApiURLProd + '/addProd', prod);
   }
 
   /* supprimerProduit(id: number) {
@@ -53,9 +47,8 @@ export class ProduitService {
   } */
 
   supprimerProduit(id: number) {
-    const url = `${apiURLProd}/delProdById/${id}`;
-    let httpHeaders = this.creerHeaders();
-    return this.http.delete(url, { headers: httpHeaders });
+    const url = `${rcApiURLProd}/delProdById/${id}`;
+    return this.http.delete(url);
   }
 
   /* consulterProduit(id: number): Observable<Produit> {
@@ -64,9 +57,8 @@ export class ProduitService {
   } */
 
   consulterProduit(id: number): Observable<Produit> {
-    const url = `${apiURLProd}/getProdById/${id}`;
-    let httpHeaders = this.creerHeaders();
-    return this.http.get<Produit>(url, { headers: httpHeaders });
+    const url = `${rcApiURLProd}/getProdById/${id}`;
+    return this.http.get<Produit>(url);
   }
 
   /* modifierProduit(prod: Produit): Observable<Produit> {
@@ -74,28 +66,20 @@ export class ProduitService {
   } */
 
   modifierProduit(prod: Produit): Observable<Produit> {
-    let httpHeaders = this.creerHeaders();
-    return this.http.put<Produit>(apiURLProd + '/updateProd', prod, {
-      headers: httpHeaders,
-    });
+    return this.http.put<Produit>(rcApiURLProd + '/updateProd', prod);
   }
 
   // Retourner la liste des produits d'une catégorie donnée
   rechercherProduitsParCategorie(idCat: number): Observable<Produit[]> {
-    let httpHeaders = this.creerHeaders();
-    const url = `${apiURLProd}/prodsByCat/${idCat}`;
-    return this.http.get<Produit[]>(url, {
-      headers: httpHeaders,
-    });
+    const url = `${rcApiURLProd}/prodsByCat/${idCat}`;
+    return this.http.get<Produit[]>(url);
   }
 
   rechercherProduitsParNom(nom: string): Observable<Produit[]> {
-    let httpHeaders = this.creerHeaders();
-    const url = `${apiURLProd}/prodsByName/${nom}`;
-    return this.http.get<Produit[]>(url, {
-      headers: httpHeaders,
-    });
+    const url = `${rcApiURLProd}/prodsByName/${nom}`;
+    return this.http.get<Produit[]>(url);
   }
+
 
   /* // Utilise l'API de RestController pour lister les catégories
   listerCategories(): Observable<Categorie[]> {
@@ -104,19 +88,20 @@ export class ProduitService {
 
   // Utilise l'API de Spring Data Rest pour lister les catégories
   listerCategories(): Observable<CategorieWrapper> {
-    let httpHeaders = this.creerHeaders();
-    return this.http.get<CategorieWrapper>(apiURLCat, {
-      headers: httpHeaders,
-    });
+    return this.http.get<CategorieWrapper>(drApiURLCat);
   }
 
   // Utilise l'API de Spring Data Rest pour ajouter une catégorie
+  // Cette méthode est la même pour ajouter ou modifier une catégorie
+  // Voir produitServiceImpl.java dans la partie Spring Boot
   ajouterCategorie(cat: Categorie): Observable<Categorie> {
-    // Cette méthode est la même pour ajouter ou modifier une catégorie
-    // Voir produitServiceImpl.java dans la partie Spring Boot
-    let httpHeaders = this.creerHeaders();
-    return this.http.post<Categorie>(apiURLCat, cat, {
-      headers: httpHeaders,
-    });
+    return this.http.post<Categorie>(drApiURLCat, cat);
   }
+
+  // Utilise l'API de Spring Data Rest pour supprimer une catégorie
+  supprimerCategorieParId(idCat: number): Observable<Categorie> {
+    const url = `${drApiURLCat}/${idCat}`;
+    return this.http.delete<Categorie>(url);
+  }
+
 }

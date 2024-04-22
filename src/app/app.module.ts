@@ -7,14 +7,16 @@ import { ProduitsComponent } from './produits/produits.component';
 import { AddProduitComponent } from './add-produit/add-produit.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateProduitComponent } from './update-produit/update-produit.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { RechercheParCategorieComponent } from './recherche-par-categorie/recherche-par-categorie.component';
 import { RechercheParNomComponent } from './recherche-par-nom/recherche-par-nom.component';
-import { SearchFilterPipe } from './search-filter.pipe';
+import { SearchFilterPipe } from './services/search-filter.pipe';
 import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
 import { UpdateCategorieComponent } from './update-categorie/update-categorie.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { tokenInterceptor } from './services/token.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -30,13 +32,10 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     LoginComponent,
     ForbiddenComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  providers: [
+    provideHttpClient(withInterceptors([tokenInterceptor])),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

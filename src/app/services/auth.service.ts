@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../model/user.model';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { apiURLUsers } from '../config';
+import { drApiURLUsers } from '../config';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {}
 
   login(user: User) {
-    return this.http.post<User>(apiURLUsers + '/login', user, {
+    return this.http.post<User>(drApiURLUsers + '/login', user, {
       observe: 'response',
     });
   }
