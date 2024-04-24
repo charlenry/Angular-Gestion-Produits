@@ -13,11 +13,12 @@ export class TokenService {
 
 export const tokenInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>, next: HttpHandlerFn) => {
   
-  const urlToExclude = "/login";
+  const urlsToExclude = ["/login", "/register"];
 
-  //tester s'il sagit de login, on n'ajoute pas le header Authorization
-  //puisqu'on a pas encode de JWT (il est null)
-  if(request.url.search(urlToExclude) === -1) {
+  const isExcluded = urlsToExclude.some(url => request.url.search(url) > -1);
+
+  // Pour tout URL qui n'est pas dans la liste des URLs à exclure
+  if(!isExcluded) {
     const reqWithToken = request.clone({
       headers: request.headers
         .set('Authorization', `Bearer ${inject(TokenService).jwt}`)

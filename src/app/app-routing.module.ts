@@ -9,6 +9,7 @@ import { ListeCategoriesComponent } from './liste-categories/liste-categories.co
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { authGuard } from './services/produit.guard';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: "listeCategories", component : ListeCategoriesComponent, canActivate: [authGuard]},
   { path: 'login', component: LoginComponent },
   {path: 'app-forbidden', component: ForbiddenComponent},
+  {path:'register', component:RegisterComponent},
   { path: "", redirectTo: "produits", pathMatch: "full" }
 ];
 

@@ -101,4 +101,10 @@ export class AuthService {
     // localStorage.setItem('isloggedIn', String(this.isloggedIn));
     this.router.navigate(['/login']);
   }
+
+  registerUser(user: User) {
+    return this.http.post<User>(drApiURLUsers + '/register', user, {
+      observe: 'response',
+    });
+  }
 }

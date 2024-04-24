@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        <strong>{{errorMessage}}</strong>
+      </div>
+      <form [formGroup]="enrollForm">
+        <div class="form-group">
+          <label>Nom Utilisateur :</label>
+          <input type="text" name="username" class="form-control" formControlName="username">
+        </div>
+        <span *ngIf="enrollForm.controls['username'].hasError('required') && enrollForm.controls['username'].touched" class="text-danger">
+          Nom Utilisateur est obligatoire
+        </span>
+        <div class="form-group">
+          <label>Email :</label>
+          <input type="text" name="email" class="form-control" formControlName="email">
+        </div>
+        <span *ngIf="enrollForm.controls['email'].hasError('required') && enrollForm.controls['email'].touched" class="text-danger">
+          Email est obligatoire
+        </span>
+        <span *ngIf="enrollForm.controls['email'].hasError('email') && enrollForm.controls['email'].touched" class="text-danger">
+          Email non valide
+        </span>
+        <div class="form-group">
+          <label>Mot de passe :</label>
+          <input type="password" name="password" formControlName="password" class="form-control">
+        </div>
+        <span *ngIf="enrollForm.controls['password'].hasError('required') && enrollForm.controls['password'].touched" class="text-danger">
+          Mot de passe est obligatoire
+        </span>
+        <span *ngIf="enrollForm.controls['password'].hasError('minlength') && enrollForm.controls['password'].touched" class="text-danger">
+          Le mot de passe doit contenir au moins 6 caractères.
+        </span>
+        <div class="form-group">
+          <label>Confirmer Mot de passe :</label>
+          <input type="password" name="confirmPassword" formControlName="confirmPassword" class="form-control">
+        </div>
+        <span *ngIf="enrollForm.controls['confirmPassword'].hasError('required') && enrollForm.controls['confirmPassword'].touched" class="text-danger">
+          Confirmez le mot de passe.
+        </span>
+        <div>
+          <span *ngIf="enrollForm.controls['confirmPassword'].touched && enrollForm.get('confirmPassword')!.value !== enrollForm.get('password')!.value && enrollForm.get('password')!.value !== '' && enrollForm.get('confirmPassword')!.value !== ''" class="text-danger">
+            Le mot de passe confirmé ne correspond pas au mot de passe tapé.
+          </span>
+        </div>
+        <button type="button" [disabled]="!checkValidation(enrollForm)" class="btn btn-success mt-2"
+          (click)="onRegister()">S'insrire
+        </button>
+        <p class="mt-2">Vous avez un compte ? <a routerLink="/login">Se connecter </a></p>
+      </form>
+    </div>
+  </div>
+</div>

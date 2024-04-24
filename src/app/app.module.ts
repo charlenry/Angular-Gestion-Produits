@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProduitsComponent } from './produits/produits.component';
 import { AddProduitComponent } from './add-produit/add-produit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateProduitComponent } from './update-produit/update-produit.component';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { RechercheParCategorieComponent } from './recherche-par-categorie/recherche-par-categorie.component';
@@ -16,6 +16,7 @@ import { UpdateCategorieComponent } from './update-categorie/update-categorie.co
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { tokenInterceptor } from './services/token.interceptor';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -31,8 +32,9 @@ import { tokenInterceptor } from './services/token.interceptor';
     UpdateCategorieComponent,
     LoginComponent,
     ForbiddenComponent,
+    RegisterComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [
     provideHttpClient(withInterceptors([tokenInterceptor])),
   ],
