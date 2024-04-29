@@ -19,6 +19,7 @@ export class AuthService {
   public loggedUser!: string; // user login
   public isloggedIn: boolean = false;
   public roles!: string[];
+  public registeredUser: User = new User();
 
   private jwtDecoder = new JwtHelperService();
 
@@ -106,5 +107,17 @@ export class AuthService {
     return this.http.post<User>(drApiURLUsers + '/register', user, {
       observe: 'response',
     });
+  }
+
+  setRegisteredUser(user: User) {
+    this.registeredUser = user;
+  }
+
+  getRegisteredUser() {
+    return this.registeredUser;
+  }
+
+  validateEmail(code: string) {
+    return this.http.get<User>(drApiURLUsers + '/verifyEmail/' + code);
   }
 }

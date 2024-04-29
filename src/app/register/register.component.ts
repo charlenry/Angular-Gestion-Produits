@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(6)]),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -50,8 +51,9 @@ export class RegisterComponent implements OnInit {
 
     this.authService.registerUser(this.user).subscribe({
       next: (res) => {
-        alert('Veillez confirmer votre email');
-        // this.router.navigate(["/verifEmail",this.user.email]);
+        this. authService.setRegisteredUser(this.user);
+        alert("Veuillez confirmer votre email");
+        this.router.navigate(["/verifEmail"]);
       },
       error: (err: any) => {
         console.log("error: ", err);

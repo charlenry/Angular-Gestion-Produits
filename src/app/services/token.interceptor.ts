@@ -13,7 +13,7 @@ export class TokenService {
 
 export const tokenInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown>, next: HttpHandlerFn) => {
   
-  const urlsToExclude = ["/login", "/register"];
+  const urlsToExclude = ["/login", "/register", "/verifyEmail"];
 
   const isExcluded = urlsToExclude.some(url => request.url.search(url) > -1);
 
