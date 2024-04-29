@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../model/user.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-verif-email',
@@ -15,7 +16,8 @@ export class VerifEmailComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +27,8 @@ export class VerifEmailComponent implements OnInit {
   onValidateEmail(){
     this.authService.validateEmail(this.code).subscribe({
       next: (res: any) => {
-        alert('Login successful');
+        // alert('Login successful');
+        this.toastr.success('Votre compte est activé !', 'Confirmation réussie');
         this.authService.login(this.user).subscribe({
           next: (data) => {
             let jwToken = data.headers.get('Authorization')!;

@@ -3,6 +3,7 @@ import { User } from '../model/user.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   public user: User = new User();
   errorMessage: string = '';
+  loading: boolean = false;
 
   enrollForm = new FormGroup({
     username: new FormControl(null, Validators.required),
@@ -20,7 +22,7 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl(null, [Validators.required, Validators.minLength(6)]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {}
 
@@ -44,6 +46,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
+    this.loading = true;
     this.user.username = this.enrollForm.value.username!;
     this.user.email = this.enrollForm.value.email!;
     this.user.password = this.enrollForm.value.password!;
@@ -52,7 +55,9 @@ export class RegisterComponent implements OnInit {
     this.authService.registerUser(this.user).subscribe({
       next: (res) => {
         this. authService.setRegisteredUser(this.user);
-        alert("Veuillez confirmer votre email");
+        this.loading = false;
+        // alert("Veuillez confirmer votre email");
+        this.toastr.success('Veuillez confirmer votre email', 'Demande de confirmation');
         this.router.navigate(["/verifEmail"]);
       },
       error: (err: any) => {

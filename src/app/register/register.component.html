@@ -44,6 +44,11 @@
             Le mot de passe confirmé ne correspond pas au mot de passe tapé.
           </span>
         </div>
+        <div *ngIf="loading == true" class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="sr-only">En train d'envoyer l'email...</span>
+          </div>
+        </div>
         <button type="button" [disabled]="!checkValidation(enrollForm)" class="btn btn-success mt-2"
           (click)="onRegister()">S'insrire
         </button>
