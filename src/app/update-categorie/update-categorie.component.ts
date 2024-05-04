@@ -34,5 +34,7 @@ export class UpdateCategorieComponent implements OnInit {
     } else {
       this.message = 'Catégorie ' + this.i_categorie.nomCat + ' modifiée avec succès !';
     }
+    this.i_categorie.nomCat = '';
+    this.i_categorie.descriptionCat = '';
   }
 }

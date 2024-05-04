@@ -22,7 +22,7 @@ export const tokenInterceptor: HttpInterceptorFn = (request: HttpRequest<unknown
     const reqWithToken = request.clone({
       headers: request.headers
         .set('Authorization', `Bearer ${inject(TokenService).jwt}`)
-        .set('Content-Type', 'application/json'),
+        // .set('Content-Type', 'application/json')
     });
 
     return next(reqWithToken);

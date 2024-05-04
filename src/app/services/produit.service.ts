@@ -6,9 +6,13 @@ import { Categorie } from '../model/categorie.model';
 import { rcApiURLProd,  rcApiURLCat, drApiURLCat } from '../config';
 import { CategorieWrapper } from '../model/categorieWrapped.model';
 import { AuthService } from './auth.service';
+import { Image } from '../model/image.model';
+
 
 /* const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json'
+  })
 }; */
 
 @Injectable({
@@ -23,7 +27,7 @@ export class ProduitService {
     return this.http.get<Produit[]>(apiURLProd + '/all');
   } */
 
- /*  creerHeaders(): HttpHeaders {
+  /*  creerHeaders(): HttpHeaders {
     let jwt = this.authService.getToken();
     jwt = 'Bearer ' + jwt;
     return new HttpHeaders({ "Authorization": jwt, "Content-Type": "application/json" });
@@ -38,6 +42,7 @@ export class ProduitService {
   } */
 
   ajouterProduit(prod: Produit): Observable<Produit> {
+    console.log('idImage depuis ajouterProduit : ', prod.image.idImage); 
     return this.http.post<Produit>(rcApiURLProd + '/addProd', prod);
   }
 
@@ -80,7 +85,6 @@ export class ProduitService {
     return this.http.get<Produit[]>(url);
   }
 
-
   /* // Utilise l'API de RestController pour lister les catégories
   listerCategories(): Observable<Categorie[]> {
     return this.http.get<Categorie[]>(apiURLProduits + '/cat');
@@ -102,6 +106,44 @@ export class ProduitService {
   supprimerCategorieParId(idCat: number): Observable<Categorie> {
     const url = `${drApiURLCat}/${idCat}`;
     return this.http.delete<Categorie>(url);
+  }
+
+  /*
+   * FormData est une interface Web intégrée qui fournit une manière simple de construire un ensemble de paires clé/valeur 
+   * représentant des champs de formulaire et leurs valeurs. Elle est principalement utilisée pour envoyer des données de 
+   * formulaire à un serveur web via des requêtes HTTP, comme POST.
+   */
+  /**
+   * The `uploadImage` method in the `ProduitService` class is used to upload an image file to the server. It takes two parameters:
+1. `file`: This parameter of type `File` represents the image file that needs to be uploaded.
+2. `filename`: This parameter of type `string` represents the name of the file.
+   * 
+   * @method
+   * @name uploadImage
+   * @kind method
+   * @memberof ProduitService
+   * @param {File} file
+   * @param {string} filename
+   * @returns {Observable<Image>}
+   */
+  uploadImage(file: File, filename: string): Observable<Image> {
+    const imageFormData = new FormData();
+    console.log('file : ', file);
+    console.log('filename : ', filename);
+    imageFormData.append("image", file, filename);
+    const url = `${rcApiURLProd + '/image/upload'}`;
+    console.log('imageFormData : ', imageFormData);
+    return this.http.post<Image>(url, imageFormData);
+  }
+
+  loadImage(id: number): Observable<Image> {
+    const url = `${rcApiURLProd + '/image/getInfo'}/${id}`;
+    return this.http.get<Image>(url);
+  }
+
+  deleteImage(id: number): Observable<Image> {
+    const url = `${rcApiURLProd + '/image/delete'}/${id}`;
+    return this.http.delete<Image>(url);
   }
 
 }
