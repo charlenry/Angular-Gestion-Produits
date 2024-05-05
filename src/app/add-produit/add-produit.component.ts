@@ -23,7 +23,7 @@ export class AddProduitComponent implements OnInit {
   ngOnInit(): void {
     this.produitService.listerCategories().subscribe((cats) => {
       this.categories = cats._embedded.categories;
-      console.log(cats);
+      // console.log(cats);
     });
   }
 
@@ -42,30 +42,29 @@ export class AddProduitComponent implements OnInit {
   } */
 
   addProduit() {
-    console.log('uploadedImage : ', this.uploadedImage);
-    console.log('uploadedImage : ', this.uploadedImage.name);
-    // console.log("imagePath : ", this.imagePath);
+    this.newProduit.categorie = this.categories.find(
+      (cat) => cat.idCat == this.newIdCat
+    )!;
 
-    this.produitService
-      .uploadImage(this.uploadedImage, this.uploadedImage.name)
+    this.produitService.ajouterProduit(this.newProduit).subscribe(prod => {
+      console.log("prod", prod);
+
+      this.newProduit.idProduit = prod.idProduit;
+
+      this.produitService
+      .uploadImageProd(
+        this.uploadedImage,
+        this.uploadedImage.name,
+        this.newProduit.idProduit
+      )
       .subscribe((img: Image) => {
-        this.newProduit.image = img;
-
-        console.log('newProduit.image : ', this.newProduit.image);
-    
-        this.newProduit.categorie = this.categories.find(
-          (cat) => cat.idCat == this.newIdCat
-        )!;
-
-        console.log('newProduit : ', this.newProduit);
-
-        this.produitService.ajouterProduit(this.newProduit).subscribe(() => {
-          this.message = 'Produit ' + this.newProduit.nomProduit + ' ajouté avec succès !';
-          this.newProduit = new Produit();
-          this.imagePath = undefined;
-          // this.router.navigate(['produits']);
-        });
+        //console.log("img", img);
+        this.message = 'Produit ' + this.newProduit.nomProduit + ' ajouté avec succès !';
+        this.newProduit = new Produit();
+        this.imagePath = undefined;
+        // this.router.navigate(['produits']);
       });
+    });
   }
 
   onImageUpload(event: any) {
@@ -76,4 +75,5 @@ export class AddProduitComponent implements OnInit {
       this.imagePath = reader.result;
     };
   }
+
 }

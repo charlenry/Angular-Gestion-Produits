@@ -42,7 +42,6 @@ export class ProduitService {
   } */
 
   ajouterProduit(prod: Produit): Observable<Produit> {
-    console.log('idImage depuis ajouterProduit : ', prod.image.idImage); 
     return this.http.post<Produit>(rcApiURLProd + '/addProd', prod);
   }
 
@@ -51,9 +50,9 @@ export class ProduitService {
     return this.http.delete(url, httpOptions);
   } */
 
-  supprimerProduit(id: number) {
+  supprimerProduit(id: number): Observable<Produit>  {
     const url = `${rcApiURLProd}/delProdById/${id}`;
-    return this.http.delete(url);
+    return this.http.delete<Produit>(url);
   }
 
   /* consulterProduit(id: number): Observable<Produit> {
@@ -144,6 +143,13 @@ export class ProduitService {
   deleteImage(id: number): Observable<Image> {
     const url = `${rcApiURLProd + '/image/delete'}/${id}`;
     return this.http.delete<Image>(url);
+  }
+
+  uploadImageProd(file: File, filename: string, idProd: number): Observable<Image> {
+    const imageFormData = new FormData();
+    imageFormData.append('image', file, filename);
+    const url = `${rcApiURLProd + '/image/uploadImageProd'}/${idProd}`;
+    return this.http.post<Image>(url, imageFormData);
   }
 
 }

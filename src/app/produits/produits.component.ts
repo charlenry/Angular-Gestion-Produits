@@ -18,7 +18,7 @@ export class ProduitsComponent implements OnInit {
     this.chargerProduits();
   }
 
-  chargerProduits() {
+  /* chargerProduits() {
     this.produitService.listerProduits().subscribe((prods) => {
       console.log(prods);
       this.produits = prods;
@@ -32,11 +32,26 @@ export class ProduitsComponent implements OnInit {
           });
       });
     });
+  } */
+  
+  chargerProduits() {
+    this.produitService.listerProduits().subscribe((prods) => {
+      console.log(prods);
+      this.produits = prods;
+
+      // Afficher la première image de chaque produit dans la liste des produits
+      this.produits.forEach((prod) => {
+        prod.imageToDisplay = 'data:' + prod.images[0].type + ';base64,' + prod.images[0].image;
+      });
+    });
   }
 
   deleteProduit(prod: Produit) {
     let isConfirmed = confirm('Etes-vous sûr ?');
     if (isConfirmed)
+      prod.images.forEach((img) => {
+        this.produitService.deleteImage(img.idImage).subscribe(() => {});
+      });
       this.produitService.supprimerProduit(prod.idProduit).subscribe(() => {
         console.log('produit supprimé');
         this.chargerProduits();

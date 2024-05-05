@@ -18,7 +18,7 @@
             <td>{{produit.prixProduit}}</td>
             <td>{{produit.dateCreation | date:'dd/MM/yyyy'}}</td>
             <td>{{produit.categorie.nomCat}}</td>
-            <td><img class="card-img-top img-responsive" src="{{produit.imageToDisplay}}" style="height : 70px; width: 100px; object-fit: cover;"></td>
+            <td><img class="card-img-top img-responsive" src="{{produit.imageToDisplay}}" style="height : 100px; width: 120px; object-fit: cover;"></td>
             <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="deleteProduit(produit)">Supprimer</a></td>
             <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateProduit',produit.idProduit]">Modifier</a></td>
           </tr>
