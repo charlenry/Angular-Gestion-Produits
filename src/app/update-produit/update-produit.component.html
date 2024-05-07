@@ -12,7 +12,7 @@
       <input type="text" [(ngModel)]="currentProduit.nomProduit" name="nomProduit" class="form-control" id="nomProduit">
     </div>
     <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
-      <label for="prixProduit">Prix Produit</label>
+      <label for="prixProduit">Prix Produit (€)</label>
       <input type="number" [(ngModel)]="currentProduit.prixProduit" name="prixProduit" class="form-control" id="prixProduit">
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
@@ -21,7 +21,7 @@
         (ngModelChange)=" currentProduit.dateCreation= $event" name="dateCreation" class="form-control" id="dateCreation">
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
-      <label for="idCat">Categorie</label>
+      <label for="idCat">Catégorie</label>
       <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="updatedCatId">
         <option *ngFor="let cat of categories" [value]="cat.idCat">
           {{cat.nomCat}}

@@ -21,6 +21,7 @@
             <td><img class="card-img-top img-responsive" src="{{produit.imageToDisplay}}" style="height : 100px; width: 120px; object-fit: cover;"></td>
             <td><a *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="deleteProduit(produit)">Supprimer</a></td>
             <td><a *ngIf="authService.isAdmin()" class="btn btn-success" [routerLink]="['/updateProduit',produit.idProduit]">Modifier</a></td>
+            <td><a class="btn btn-primary" [routerLink]="['/seeDetails',produit.idProduit]">Voir Détails</a></td>
           </tr>
         </tbody>
       </table>

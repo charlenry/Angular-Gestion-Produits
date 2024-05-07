@@ -19,7 +19,7 @@
         </tr>
         <!-- @for (note of notes; track $index) {} pour v17+ -->
         <tbody *ngFor="let produit of produits">
-          <tr>
+          <tr style="cursor: pointer" [routerLink]="['/seeDetails', produit.idProduit]">
             <td>{{produit.idProduit}}</td>
             <td>{{produit.nomProduit}}</td>
             <td>{{produit.prixProduit}}</td>

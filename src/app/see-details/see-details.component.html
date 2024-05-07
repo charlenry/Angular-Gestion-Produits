@@ -1,0 +1,50 @@
+<div class="container mt-3">
+  <div>
+    <h2>Détails d'un Produit :</h2>
+  </div>
+  <form>
+    <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
+      <label for="idProduit">ID Produit</label>
+      <input readonly type="text" [ngModel]="currentProduit.idProduit" name="idProduit" class="form-control" id="idProduit">
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label for="nomProduit">Nom Produit</label>
+      <input readonly type="text" [ngModel]="currentProduit.nomProduit" name="nomProduit" class="form-control" id="nomProduit">
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
+      <label for="prixProduit">Prix Produit (€)</label>
+      <input readonly type="number" [ngModel]="currentProduit.prixProduit" name="prixProduit" class="form-control" id="prixProduit">
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label for="dateCreation">Date création</label>
+      <input readonly type="date" [ngModel]="currentProduit.dateCreation | date: 'yyyy-MM-dd'"
+        (ngModelChange)=" currentProduit.dateCreation= $event" name="dateCreation" class="form-control" id="dateCreation">
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 mb-3">
+      <label for="categorie">Catégorie</label>
+      <input readonly type="text" [ngModel]="categorie" name="categorie" class="form-control" id="categorie">
+    </div>
+    <div class="col-sm-8 col-md-8 col-lg-8 mb-2">
+      <img [src]="myImage" class="card-img-top img-fluid rounded-start" style="width: 300px;" />
+    </div>
+    <div class="card shadow col-sm-8 col-md-8 col-lg-8 mb-4">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Images</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let img of currentProduit.images">
+            <tr>
+              <td>
+                <img (click)="zoomerImage(img)" class="card-img-top img-responsive" src="{{'data:' + img.type + ';base64,' + img.image}}"
+                style="height : 100px; width: 120px; object-fit: cover; cursor: pointer">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </form>
+</div>

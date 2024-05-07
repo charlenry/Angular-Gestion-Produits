@@ -24,6 +24,7 @@ import { RegisterComponent } from './register/register.component';
 import { VerifEmailComponent } from './verif-email/verif-email.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SeeDetailsComponent } from './see-details/see-details.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ForbiddenComponent,
     RegisterComponent,
     VerifEmailComponent,
+    SeeDetailsComponent,
   ],
   imports: [
     BrowserModule,
