@@ -42,4 +42,8 @@ export class SeeDetailsComponent implements OnInit {
   zoomerImage(img: Image) {
     this.myImage = 'data:' + img.type + ';base64,' + img.image;
   }
+
+  scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
 }
