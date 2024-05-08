@@ -24,6 +24,7 @@ export class ProduitService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  
   /* listerProduits(): Observable<Produit[]> {
     return this.http.get<Produit[]>(apiURLProd + '/all');
   } */
