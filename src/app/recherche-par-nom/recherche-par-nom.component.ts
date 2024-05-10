@@ -23,6 +23,10 @@ export class RechercheParNomComponent implements OnInit {
     });
   }
 
+  scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'}); 
+  }
+
   /* rechercherProds() {
     if (this.nomProduit !== "") {
       this.produitService.rechercherProduitsParNom(this.nomProduit).subscribe((prods) => {

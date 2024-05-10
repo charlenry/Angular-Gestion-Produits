@@ -9,7 +9,7 @@ import { ProduitService } from '../services/produit.service';
   styleUrl: './recherche-par-categorie.component.css'
 })
 export class RechercheParCategorieComponent implements OnInit {
-  IdCategorie!: number;
+  IdCategorie: number = 1;
   categories!: Categorie[];
   produits!: Produit[ ];
 
@@ -20,6 +20,12 @@ export class RechercheParCategorieComponent implements OnInit {
       this.categories = cats._embedded.categories;
       console.log(cats);
     });
+
+    this.produitService
+      .rechercherProduitsParCategorie(1)
+      .subscribe((prods) => {
+        this.produits = prods;
+    });
   }
 
   onChange() {
@@ -29,4 +35,9 @@ export class RechercheParCategorieComponent implements OnInit {
         this.produits = prods;
     });
   }
+
+  scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'}); 
+  }
+
 }
