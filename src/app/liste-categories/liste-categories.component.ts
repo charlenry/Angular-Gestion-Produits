@@ -25,6 +25,7 @@ export class ListeCategoriesComponent implements OnInit {
     this.produitService
       .ajouterCategorie(cat)
       .subscribe(() => this.chargerCategories());
+      this.editedCat = { idCat: 0, nomCat: '', descriptionCat: ''};
   }
 
   chargerCategories() {
