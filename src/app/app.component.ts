@@ -8,7 +8,7 @@ import { KeycloakProfile } from 'keycloak-js';
   styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
-  title = 'MesProduits';
+  title = 'Gestion de produits';
 
   public profile!: KeycloakProfile;
   public username!: string;

@@ -23,20 +23,8 @@ export class RechercheParNomComponent implements OnInit {
     });
   }
 
-  /* rechercherProds() {
-    if (this.nomProduit !== "") {
-      this.produitService.rechercherProduitsParNom(this.nomProduit).subscribe((prods) => {
-        this.produits = prods;
-        console.log(prods);
-      });
-    }    
-  } */
-
-  /* onKeyUp(filterText: string) {
-    this.produits = this.allProduits.filter(prod =>
-    prod.nomProduit.toLowerCase().includes(filterText.toLowerCase())
-    );
-  } */
-
-  // Finalement, nous utilisons la méthode filter() dans le pipe searchFilter pour filtrer les produits en fonction du terme de recherche.
+  scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  
 }

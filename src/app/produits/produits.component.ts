@@ -59,4 +59,9 @@ export class ProduitsComponent implements OnInit {
         this.chargerProduits();
       });
   }
+
+  scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  
 }
