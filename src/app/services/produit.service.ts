@@ -5,7 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Categorie } from '../model/categorie.model';
 import { rcApiURLProd,  rcApiURLCat, drApiURLCat } from '../config';
 import { CategorieWrapper } from '../model/categorieWrapped.model';
-import { AuthService } from './auth.service';
 import { Image } from '../model/image.model';
 
 
@@ -22,7 +21,7 @@ import { Image } from '../model/image.model';
 export class ProduitService {
   produits!: Produit[]; //un tableau de produits
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   
   /* listerProduits(): Observable<Produit[]> {

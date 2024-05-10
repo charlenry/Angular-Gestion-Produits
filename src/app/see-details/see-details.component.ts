@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProduitService } from '../services/produit.service';
 import { Produit } from '../model/produit.model';
 import { Categorie } from '../model/categorie.model';
@@ -22,7 +22,6 @@ export class SeeDetailsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
     private produitService: ProduitService
   ) {}
 

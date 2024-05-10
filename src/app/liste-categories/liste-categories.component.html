@@ -10,7 +10,7 @@
   </div>
   <div class="card shadow mb-4">
     <div>
-      <button type="submit" [disabled]="" class="btn btn-danger"
+      <button *ngIf="isAdmin" type="submit" [disabled]="" class="btn btn-danger"
         (click)="manageCategories()">{{isManaged ? 'Lister Categories' : 'Ajouter/Modifier Catégories'}}
       </button>
     </div>
@@ -28,8 +28,8 @@
             <td>{{cat.idCat}}</td>
             <td>{{cat.nomCat}}</td>
             <td>{{cat.descriptionCat}}</td>
-            <td><a class="btn btn-danger" (click)="deleteCategorie(cat.idCat)" *ngIf="isManaged">Supprimer</a></td>
-            <td><a class="btn btn-success" (click)="editCat(cat)" *ngIf="isManaged">Modifier</a></td>
+            <td><a class="btn btn-danger" (click)="deleteCategorie(cat.idCat)" *ngIf="isManaged && isAdmin">Supprimer</a></td>
+            <td><a class="btn btn-success" (click)="editCat(cat)" *ngIf="isManaged && isAdmin">Modifier</a></td>
           </tr>
         </tbody>
       </table>

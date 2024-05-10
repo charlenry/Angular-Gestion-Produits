@@ -1,0 +1,23 @@
+<div class="container mt-3">
+  <div>
+    <h2>Profil de l'utilisateur</h2>
+  </div>
+  <form>
+    <div class="col-sm-2 col-md-4 col-lg-4 mb-3">
+      <label for="username">Login</label>
+      <input readonly type="text"  [ngModel]="username" name="username" class="form-control" id="username">
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label for="firstName">Prénom</label>
+      <input readonly type="text"  [ngModel]="firstName" name="firstName" class="form-control" id="firstName">
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label for="lastName">Nom</label>
+      <input readonly type="text"  [ngModel]="lastName" name="lastName" class="form-control" id="lastName">
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+      <label for="email">Email</label>
+      <input readonly type="text"  [ngModel]="email" name="email" class="form-control" id="email">
+    </div>
+  </form>
+</div>

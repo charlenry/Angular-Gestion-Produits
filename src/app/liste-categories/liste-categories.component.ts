@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categorie } from '../model/categorie.model';
 import { ProduitService } from '../services/produit.service';
-import { AuthService } from '../services/auth.service';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-liste-categories',
@@ -13,10 +13,12 @@ export class ListeCategoriesComponent implements OnInit {
   editedCat: Categorie = { idCat: 0, nomCat: '', descriptionCat: ''};
   isAnAdding: boolean = true;
   isManaged: boolean = false;
+  isAdmin: boolean = false;
 
-  constructor(private produitService: ProduitService, public authService: AuthService) {}
+  constructor(private produitService: ProduitService, public keycloakService: KeycloakService) {}
 
   ngOnInit(): void {
+    this.isAdmin = this.keycloakService.isUserInRole('ADMIN');
     this.chargerCategories();
   }
 
@@ -25,6 +27,7 @@ export class ListeCategoriesComponent implements OnInit {
     this.produitService
       .ajouterCategorie(cat)
       .subscribe(() => this.chargerCategories());
+    this.editedCat = { idCat: 0, nomCat: '', descriptionCat: ''};
   }
 
   chargerCategories() {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Produit } from '../model/produit.model';
 import { ProduitService } from '../services/produit.service';
-import { AuthService } from '../services/auth.service';
-import { Image } from '../model/image.model';
+import { KeycloakService } from 'keycloak-angular';
+// import { Image } from '../model/image.model';
 
 @Component({
   selector: 'app-produits',
@@ -11,10 +11,12 @@ import { Image } from '../model/image.model';
 })
 export class ProduitsComponent implements OnInit {
   produits!: Produit[]; //un tableau de produits
+  isAdmin: boolean = false;
 
-  constructor(private produitService: ProduitService, public authService: AuthService) {}
+  constructor(private produitService: ProduitService, private keycloakService: KeycloakService) {}
 
   ngOnInit(): void {
+    this.isAdmin = this.keycloakService.isUserInRole('ADMIN');
     this.chargerProduits();
   }
 

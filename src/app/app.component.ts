@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
+import { KeycloakProfile } from 'keycloak-js';
 
 @Component({
   selector: 'app-root',
@@ -10,19 +10,30 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'MesProduits';
 
-  constructor(public authService: AuthService, private router: Router) {}
+  public profile!: KeycloakProfile;
+  public username!: string;
+  isAdmin: boolean = false;
+
+  constructor(public keycloakService: KeycloakService) {}
 
   ngOnInit() {
-    this.authService.loadToken();
-
-    if (!this.authService.isUserLoggedIn()) {
-      this.router.navigate(['/login']);
-    }  else {
-      this.router.navigate(['/']);
-    }
+    let isConnected = this.keycloakService.isLoggedIn();
+    if (isConnected) this.keycloakService.loadUserProfile().then(profile => {
+      this.profile = profile!;
+      this.username = this.profile.username!;
+      this.isAdmin = this.keycloakService.isUserInRole('ADMIN');
+      console.log("profile", this.profile);
+    });
   }
 
-  onLogout() {
-    this.authService.logout();
+  async onLogout() {
+    await this.keycloakService.logout(window.location.origin);
   }
+
+  async onLogin() {
+    await this.keycloakService.login({
+      redirectUri: window.location.origin
+    });
+  }
+
 }
