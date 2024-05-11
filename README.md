@@ -1,6 +1,6 @@
 # Partie Frontend de l'application "Gestion de produits"
 
-Cette application permet de gérer des produits avec des accès sécurisés selon les rôles attribués à chaque utilisateur. Il y a un rôle `administrateur` et un rôle `utilisateur`. L'application a été développée dans le cadre du projet fil rouge d'une formation MOOC pour devenir `Développeur Full Stack Java Spring Boot 3 / Angular`. Elle est composée de trois parties : 
+Cette application permet de gérer des produits avec des accès sécurisés selon les rôles attribués à chaque utilisateur. Il y a un rôle `administrateur` et un rôle `utilisateur`. L'application a été développée dans le cadre du projet fil rouge d'une formation MOOC pour devenir **`Développeur Full Stack Java Spring Boot 3 / Angular`**. Elle est composée de trois parties : 
 
 1. Une partie `frontend` développée en Angular 17 (ce projet),
 2. Une partie `backend métier` connectée à une base de données MySQL qui permet de gérer les produits. Elle a été développée en Java avec Spring Boot 3 (voir le projet [spring-gestion-produits](https://github.com/charlenry/Spring-Gestion-Produits)),
@@ -39,19 +39,18 @@ Pour que l'application fonctionne correctement, il faut exécuter le serveur de 
 
 
 ### Keycloak
-Si vous utilisez la branche `secured_apis_with_keycloak_oauth2` pour la partie backend IAM, il faut installer Keycloak. Rendez-vous sur le site officiel de [Keycloak](https://www.keycloak.org/downloads) et téléchargez le premier fichier dans la rubrique `Server`. Décompressez-le puis rendez-vous dans le dossier `bin`. Pour lancer Keycloak, tapez la commande suivante :
+Si vous utilisez la branche `secured_apis_with_keycloak_oauth2` pour la partie backend IAM, il faut installer Keycloak. Rendez-vous sur le site officiel de [Keycloak](https://www.keycloak.org/downloads) et téléchargez le premier fichier dans la rubrique `Server`. Décompressez-le puis rendez-vous dans le dossier `bin`. 
+
+Entre temps, créez une variable d'environnement système nommée `JAVA_HOME` qui contient le chemin de votre `JDK`. 
+
+Pour lancer Keycloak, tapez la commande suivante :
 
 ```bash
 kc.[bat|sh] start-dev --http-port=8090
 ```
-kc.bat ou kc.sh selon votre système d'exploitation. Keycloak sera accessible à l'adresse `http://localhost:8090`. Créez un compte administrateur pour accéder à l'interface d'administration.
+kc.bat ou kc.sh selon votre système d'exploitation. Keycloak sera accessible à l'adresse `http://localhost:8090`. Créez un compte administrateur pour accéder à l'interface d'administration. Une fois dans l'interface d'administration, cliquez sur la liste déroulante en haut à gauche puis sur le bouton `Create realm`. Ensuite, cliquez sur `Browse...` et choisissez le fichier `products-realm.json` à télécharger depuis [GitHub](https://github.com/charlenry/Annexe-Gestion-Produits). Enfin, cliquez sur le bouton `Create` pour importer le `realm`.
 
-Puis copiez le fichier `products-realm.json` à télécharger depuis [GitHub](https://github.com/charlenry/Annexe-Gestion-Produits) dans le dossier `bin` de Keycloak. Pour importer le fichier de configuration `products-realm.json` dans keycloak, tapez la commande suivante :
-
-```bash
-kc.[bat|sh] import --file products-realm.json
-```
-kc.bat ou kc.sh selon votre système d'exploitation. Par la suite, vous pouvez vous connecter à l'interface de l'application à l'adresse `http://localhost:4200`. Vous pouvez vous connecter avec les mêmes identifiants que ceux mentionnés dans la partie `Page d'accueil` ci-dessous.
+Par la suite, vous pouvez vous connecter à l'interface de l'application à l'adresse `http://localhost:4200`. Vous pouvez vous connecter avec les mêmes identifiants que ceux mentionnés dans la partie `Page d'accueil` ci-dessous.
 
 
 ## Utilisation
