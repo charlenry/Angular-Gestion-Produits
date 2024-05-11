@@ -48,6 +48,7 @@ Pour lancer Keycloak, tapez la commande suivante :
 ```bash
 kc.[bat|sh] start-dev --http-port=8090
 ```
+
 `kc.bat` ou `kc.sh` selon votre système d'exploitation. Keycloak sera accessible à l'adresse `http://localhost:8090`. Créez un compte administrateur pour accéder à l'interface d'administration. Une fois dans l'interface d'administration, cliquez sur la liste déroulante en haut à gauche puis sur le bouton `Create realm`. Ensuite, cliquez sur `Browse...` et choisissez le fichier `products-realm.json` à télécharger depuis [GitHub](https://github.com/charlenry/Annexe-Gestion-Produits). Enfin, cliquez sur le bouton `Create` pour importer le `realm`.
 
 Par la suite, vous pouvez vous connecter à l'interface de l'application à l'adresse `http://localhost:4200`. Vous pouvez vous connecter avec les mêmes identifiants que ceux mentionnés dans la partie `Page d'accueil` ci-dessous.
