@@ -8,8 +8,8 @@ Cette application permet de gérer des produits avec des accès sécurisés selo
 
 **Remarque :** La partie IAM développée en Java avec Spring Boot 3 est interchangeable avec l'IAM `Keycloak`. Pour ce faire, il y a deux branches dans la partie `frontend` et dans la partie `backend métier` :
 
-🔸 La branche `main` qui permet de faire fonctionner les parties frontend et backend métier avec la partie IAM développée en Java avec Spring Boot 3,
-🔸 La branche `secured_apis_with_keycloak_oauth2` qui permet de faire fonctionner les parties frontend et backend métier avec l'IAM Keycloak.
+1. La branche `main` qui permet de faire fonctionner les parties frontend et backend métier avec la partie IAM développée en Java avec Spring Boot 3,
+2. La branche `secured_apis_with_keycloak_oauth2` qui permet de faire fonctionner les parties frontend et backend métier avec l'IAM Keycloak.
 
 
 ## Installation et lancement
@@ -23,7 +23,7 @@ Pour que l'application fonctionne correctement, il faut exécuter le serveur de 
 
 
 ### Partie backend métier
-1. Si vous utilisez `Spring Tool Suite` , importez le projet [spring-gestion-produits](https://github.com/charlenry/Spring-Gestion-Produits) à partir Git, fournissez l'URL du dépôt du projet et choisissez la branche `main` pour le faire fonctionner avec le projet [spring-gestion-utilisateurs](https://github.com/charlenry/Spring-Gestion-Utilisateurs). Sinon, choisissez la branche `secured_apis_with_keycloak_oauth2` pour le faire fonctionner avec Keycloak [Keycloak](https://www.keycloak.org/downloads).
+1. Si vous utilisez `Spring Tool Suite` , importez le projet [spring-gestion-produits](https://github.com/charlenry/Spring-Gestion-Produits) à partir Git, fournissez l'URL du dépôt du projet et choisissez la branche `main` pour le faire fonctionner avec le projet [spring-gestion-utilisateurs](https://github.com/charlenry/Spring-Gestion-Utilisateurs). Sinon, choisissez la branche `secured_apis_with_keycloak_oauth2` pour le faire fonctionner avec [Keycloak](https://www.keycloak.org/downloads).
 2. Lancez le projet en tant qu'application Spring Boot. L'application sera accessible à l'adresse `http://localhost:8080`.
 
 
@@ -64,13 +64,13 @@ La page d'accueil permet de se connecter à l'application. Les nouveaux utilisat
 2. Vous utilisez `Keycloak`. Dans ce cas, si vous avez importé le `realm` du projet, il est déjà préconfiguré pour fonctionner avec [MailHog](https://github.com/mailhog/MailHog/releases) que vous devez lancer. Mais vous pouvez configurer le serveur SMTP de votre choix. 
 
 Il y a deux rôles : `ADMIN` et `USER`. Les identifiants et mots de passe sont les suivants :
-🔸 Pour le rôle `ADMIN` : 
-  🔹 Identifiant : `admin`
-  🔹 Mot de passe : `123`
+1. Pour le rôle `ADMIN` : <br>
+&nbsp;&nbsp;🔹 Identifiant : `admin`<br>
+&nbsp;&nbsp;🔹 Mot de passe : `123`
 
-🔸 Pour le rôle `USER` :
-  🔹 Identifiant : `charles`
-  🔹 Mot de passe : `123` 
+2. Pour le rôle `USER` : <br>
+&nbsp;&nbsp;🔹 Identifiant : `charles`<br>
+&nbsp;&nbsp;🔹 Mot de passe : `123` 
 
 ### Page de gestion des produits
 La page de gestion des produits permet de visualiser, ajouter, modifier et supprimer des produits. Seul l'utilisateur ayant le rôle `ADMIN` peut ajouter, modifier ou supprimer des produits. Il est également possible de rechercher des produits par nom ou par catégorie.
