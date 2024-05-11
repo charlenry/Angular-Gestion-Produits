@@ -41,14 +41,14 @@ Pour que l'application fonctionne correctement, il faut exécuter le serveur de 
 ### Keycloak
 Si vous utilisez la branche `secured_apis_with_keycloak_oauth2` pour la partie backend IAM, il faut installer Keycloak. Rendez-vous sur le site officiel de [Keycloak](https://www.keycloak.org/downloads) et téléchargez le premier fichier dans la rubrique `Server`. Décompressez-le puis rendez-vous dans le dossier `bin`. 
 
-Entre temps, créez une variable d'environnement système nommée `JAVA_HOME` qui contient le chemin de votre `JDK`. 
+Entre-temps, créez une variable d'environnement système nommée `JAVA_HOME` qui contient le chemin de votre `JDK`. 
 
 Pour lancer Keycloak, tapez la commande suivante :
 
 ```bash
 kc.[bat|sh] start-dev --http-port=8090
 ```
-kc.bat ou kc.sh selon votre système d'exploitation. Keycloak sera accessible à l'adresse `http://localhost:8090`. Créez un compte administrateur pour accéder à l'interface d'administration. Une fois dans l'interface d'administration, cliquez sur la liste déroulante en haut à gauche puis sur le bouton `Create realm`. Ensuite, cliquez sur `Browse...` et choisissez le fichier `products-realm.json` à télécharger depuis [GitHub](https://github.com/charlenry/Annexe-Gestion-Produits). Enfin, cliquez sur le bouton `Create` pour importer le `realm`.
+`kc.bat` ou `kc.sh` selon votre système d'exploitation. Keycloak sera accessible à l'adresse `http://localhost:8090`. Créez un compte administrateur pour accéder à l'interface d'administration. Une fois dans l'interface d'administration, cliquez sur la liste déroulante en haut à gauche puis sur le bouton `Create realm`. Ensuite, cliquez sur `Browse...` et choisissez le fichier `products-realm.json` à télécharger depuis [GitHub](https://github.com/charlenry/Annexe-Gestion-Produits). Enfin, cliquez sur le bouton `Create` pour importer le `realm`.
 
 Par la suite, vous pouvez vous connecter à l'interface de l'application à l'adresse `http://localhost:4200`. Vous pouvez vous connecter avec les mêmes identifiants que ceux mentionnés dans la partie `Page d'accueil` ci-dessous.
 
