@@ -63,6 +63,13 @@ export class AuthService {
     return this.roles.indexOf('ADMIN') > -1;
   }
 
+  isUser(): boolean {
+    // this.roles === undefiened
+    if (!this.roles) return false;
+    // return true if the index of 'ADMIN' is greater than -1
+    return this.roles.indexOf('USER') > -1;
+  }
+
   loadToken() {
     this.token = localStorage.getItem('jwt')!;
     this.decodeJWT();

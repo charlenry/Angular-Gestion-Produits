@@ -1,0 +1,7 @@
+.login, .logout {
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+}
+.show {
+  min-width: 130px;
+}

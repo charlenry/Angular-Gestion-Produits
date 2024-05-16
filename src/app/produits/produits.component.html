@@ -1,15 +1,16 @@
 <div class="container mt-3">
-  <div class="card shadow mb-4">
-    <div class="card-body">
-      <table class="table table-striped">
-        <tr>
-          <th>Id</th>
-          <th>Nom</th>
-          <th>Prix (€)</th>
-          <th>Date Création</th>
-          <th>Catégorie</th>
-          <th>Image</th>
-        </tr>
+    <div class="">      
+      <table class="table table-sm table-striped shadow">
+        <thead class="">
+          <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prix (€)</th>
+            <th>Date Création</th>
+            <th>Catégorie</th>
+            <th>Image</th>            
+          </tr>
+        </thead>
         <!-- @for (note of notes; track $index) {} pour v17+ -->
         <tbody *ngFor="let produit of produits">
           <tr>
@@ -25,7 +26,6 @@
           </tr>
         </tbody>
       </table>
-    </div>
   </div>
   <button (click)="scrollToTop()" class="btn btn-success mb-3">Haut de page ⮭</button>
 </div>
