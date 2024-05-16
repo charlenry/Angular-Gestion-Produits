@@ -13,6 +13,8 @@ export class SeeProfileComponent {
   firstName!: string;
   lastName!: string;
   email!: string;
+  roles!: string[];
+  rolesString!: string;
 
   constructor(public keycloakService: KeycloakService) {}
 
@@ -24,6 +26,12 @@ export class SeeProfileComponent {
       this.firstName = this.profile.firstName!;
       this.lastName = this.profile.lastName!;
       this.email = this.profile.email!;
+      this.roles = this.keycloakService.getUserRoles();
+      this.roles = this.roles.filter(role => {
+        return role === 'ADMIN' || role === 'USER';
+      });
+      this.rolesString = this.roles.join(', ');
+      // console.log("profile", this.roles);
     });
   }
   

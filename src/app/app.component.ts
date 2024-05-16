@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   public profile!: KeycloakProfile;
   public username!: string;
   isAdmin: boolean = false;
-
+  
   constructor(public keycloakService: KeycloakService) {}
 
   ngOnInit() {
@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
       this.profile = profile!;
       this.username = this.profile.username!;
       this.isAdmin = this.keycloakService.isUserInRole('ADMIN');
-      console.log("profile", this.profile);
     });
   }
 

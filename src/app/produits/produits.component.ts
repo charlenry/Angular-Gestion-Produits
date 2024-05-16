@@ -38,7 +38,7 @@ export class ProduitsComponent implements OnInit {
   
   chargerProduits() {
     this.produitService.listerProduits().subscribe((prods) => {
-      console.log(prods);
+      // console.log(prods);
       this.produits = prods;
 
       // Afficher la première image de chaque produit dans la liste des produits
