@@ -1,37 +1,33 @@
 <div class="container mt-3">
   <div class="col-sm-4 col-md-4 col-lg-4 mb-4 pl-0">
-    <app-update-categorie 
-      [i_categorie]="editedCat"
-      [i_isAnAdding]="isAnAdding"
-      (o_categorieAdded)= "categorieAdded($event)"
-      *ngIf="isManaged"
-      >
+    <app-update-categorie [i_categorie]="editedCat" [i_isAnAdding]="isAnAdding"
+      (o_categorieAdded)="categorieAdded($event)" *ngIf="isManaged">
     </app-update-categorie>
   </div>
   <div class="">
     <div class="mt-4 mb-2">
-      <button type="submit" [disabled]="" class="btn btn-danger"
-        (click)="manageCategories()">{{isManaged ? 'Lister Categories' : 'Ajouter/Modifier Catégories'}}
+      <button type="submit" [disabled]="" class="btn btn-danger" (click)="manageCategories()">{{isManaged ? 'Lister
+        Categories' : 'Ajouter/Modifier Catégories'}}
       </button>
     </div>
-      <table class="table table-striped shadow">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Nom Catégorie</th>
-            <th>Description Catégorie</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let cat of categories">
-          <tr>
-            <td>{{cat.idCat}}</td>
-            <td>{{cat.nomCat}}</td>
-            <td>{{cat.descriptionCat}}</td>
-            <td><a class="btn btn-danger" (click)="deleteCategorie(cat.idCat)" *ngIf="isManaged">Supprimer</a></td>
-            <td><a class="btn btn-success" (click)="editCat(cat)" *ngIf="isManaged">Modifier</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <table class="table table-striped shadow">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nom Catégorie</th>
+          <th>Description Catégorie</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let cat of categories">
+        <tr>
+          <td>{{cat.idCat}}</td>
+          <td>{{cat.nomCat}}</td>
+          <td>{{cat.descriptionCat}}</td>
+          <td><a class="btn btn-danger" (click)="deleteCategorie(cat.idCat)" *ngIf="isManaged">Supprimer</a></td>
+          <td><a class="btn btn-success" (click)="editCat(cat)" *ngIf="isManaged">Modifier</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <button (click)="scrollToTop()" class="btn btn-success mb-3">Haut de page ⮭</button>
 </div>
